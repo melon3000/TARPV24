@@ -1,0 +1,44 @@
+{
+    "coord": {
+        "lon": 40.4299,
+        "lat": 51.4842
+    },
+    "weather": [
+        {
+            "id": 801,
+            "main": "Clouds",
+            "description": "few clouds",
+            "icon": "02d"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 22.45,
+        "feels_like": 21.38,
+        "temp_min": 22.45,
+        "temp_max": 22.45,
+        "pressure": 1019,
+        "humidity": 24,
+        "sea_level": 1019,
+        "grnd_level": 1003
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 4.65,
+        "deg": 171,
+        "gust": 6.12
+    },
+    "clouds": {
+        "all": 12
+    },
+    "dt": 1745234175,
+    "sys": {
+        "country": "RU",
+        "sunrise": 1745201388,
+        "sunset": 1745252627
+    },
+    "timezone": 10800,
+    "id": 581671,
+    "name": "Anna",
+    "cod": 200
+}

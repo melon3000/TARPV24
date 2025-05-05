@@ -1,0 +1,4 @@
+est = ['liim', 'koer', 'kass', 'maja', 'auto', 'päike', 'lol', 'bob', 'bob', 'test', 'test2', 'test3']
+rus = ['клей', 'собака', 'кошка', 'дом', 'машина', 'солнце', 'lol', 'bob', 'bob', 'test', 'test2', 'test3']
+eng = ['glue', 'dog', 'cat', 'house', 'car', 'sun', 'lol', 'bob', 'bob', 'test', 'test2', 'test3']
+ 
