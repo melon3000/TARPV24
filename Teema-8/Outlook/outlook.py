@@ -1,4 +1,4 @@
-from tkinter import filedialog
+from tkinter import filedialog, messagebox
 from tkinter import *
 import smtplib, ssl
 from email.message import EmailMessage
@@ -17,18 +17,45 @@ aken.resizable(width=False, height=False)
 def vali_pilt():
     global file
     file = filedialog.askopenfilename()
-    file_name = os.path.basename(file)  # Извлекаем только название файла
-    lisa.configure(text=file_name)  # Отображаем только имя файла
+    file_name = os.path.basename(file)  # Extract only the file name
+    lisa.configure(text=file_name)  # Display only the file name
     return file
 
 def saada():
     kellele = email.get()
     text = kiri.get("1.0", END)
+    error = False  # Флаг для отслеживания ошибок
+
+    try:
+        if email.get().strip() == "":
+            email.configure(bg="red")
+            error = True
+        else:
+            email.configure(bg="#E1EFDF")
+
+        if teema.get().strip() == "":
+            teema.configure(bg="red")
+            error = True
+        else:
+            teema.configure(bg="#E1EFDF")
+
+        kiri_text = text.strip()
+        if kiri_text == "":
+            kiri.configure(bg="red")
+            error = True
+        else:
+            kiri.configure(bg="#E1EFDF")
+
+        if error:
+            return
+    except Exception as e:
+        print(f"Viga: {e}")
+        return
 
     smtp_server = "smtp.gmail.com"
     smtp_port = 587
     sender_email = "nikitosik.pidoras@gmail.com"
-    password = "rwks xdlx cxfk mpvr"
+    em_passh = os.getenv("em_passh") # cmd -> setx em_passh = "xxxx xxxx xxxx xxxx"
     context = ssl.create_default_context()
     msg = EmailMessage()
     msg.set_content(text)
@@ -38,15 +65,18 @@ def saada():
     try:
         with smtplib.SMTP(smtp_server, smtp_port) as server:
             server.starttls(context=context)
-            server.login(sender_email, password)
+            server.login(sender_email, em_passh)
             server.send_message(msg)
-        lisa.config(text="E-kiri saadetud")
+        messagebox.showinfo(message="E-kiri saadetud")
+        email.configure(bg="#E1EFDF")
+        teema.configure(bg="#E1EFDF")
+        kiri.configure(bg="#E1EFDF")
         email.delete(0, END)
         teema.delete(0, END)
         kiri.delete("1.0", END)
 
     except Exception as e:
-        lisa.config(text=f"Viga: {e}")
+        messagebox.showinfo(message=f"Viga: {e}")
 
 #------------------------------------------------------------------------------------------------------
 
@@ -84,3 +114,36 @@ nupp_2.place(x=200, y=390)
 
 #-----------------------------------------------------------------------------------------------------
 aken.mainloop()
+
+
+"""
+🖼 Дополнительные возможности
+
+1 Предварительный просмотр письма - добавьте возможность предварительного просмотра письма перед отправкой.
+
+2 Автоматическое сохранение шаблонов, чтобы не потерять письмо при закрытии программы.
+
+///3 Отправка нескольким адресатам (адреса электронной почты, разделенные запятыми). 
+
+4 Добавление нескольких вложений, а не только одного файла.
+
+5 Сохранение отправленных писем в журнале или базе данных.
+
+🎨 Улучшение пользовательского интерфейса.
+
+1 Использование 1 ttk для улучшения оформления (более стильные кнопки и поля ввода).
+
+2 Строка загрузки при отправке, чтобы пользователь мог видеть ход процесса.
+
+3 Выбор темы (темный/светлый режим) - добавление переключателя.
+
+4 Кнопка «Очистить форму», чтобы можно было быстро очистить все поля.
+
+📤 Расширенные возможности отправки
+
+1 Добавление подписи к письму (настройки пользователя).
+
+2 Возможность форматирования текста (tkinter.Text с жирным, курсивным и различными вариантами шрифта).
+
+3 Отправка HTML-писем с возможностью форматирования. 
+"""
