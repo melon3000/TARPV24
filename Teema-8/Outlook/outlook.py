@@ -1,4 +1,4 @@
-from tkinter import filedialog, messagebox
+from tkinter import filedialog, messagebox, ttk
 from tkinter import *
 import smtplib, ssl
 from email.message import EmailMessage
@@ -13,6 +13,54 @@ aken.configure(bg="white")
 aken.resizable(width=False, height=False) 
 
 #------------------------------------------------------------------------------------------------------
+
+def theme():
+    current_bg = aken["bg"]
+
+    if current_bg == "white":
+        # Тёмная тема
+        aken.configure(bg="black")
+        label_bg = "black"
+        label_fg = "white"
+        entry_bg = "#3A3A3A"
+        entry_fg = "white"
+        button_bg = "#444"
+        button_fg = "white"
+        lisa_bg = "#111111"
+    else:
+        # Светлая тема
+        aken.configure(bg="white")
+        label_bg = "green"
+        label_fg = "white"
+        entry_bg = "#E1EFDF"
+        entry_fg = "black"
+        button_bg = "green"
+        button_fg = "black"
+        lisa_bg = "white"
+
+    # Обновляем элементы вручную
+    email_label.configure(bg=label_bg, fg=label_fg)
+    teema_label.configure(bg=label_bg, fg=label_fg)
+    lisa_label.configure(bg=label_bg, fg=label_fg)
+    kiri_label.configure(bg=label_bg, fg=label_fg)
+
+    email.configure(bg=entry_bg, fg=entry_fg)
+    teema.configure(bg=entry_bg, fg=entry_fg)
+    kiri.configure(bg=entry_bg, fg=entry_fg)
+    lisa.configure(bg=lisa_bg, fg=entry_fg)
+
+    nupp.configure(bg=button_bg, fg=button_fg)
+    nupp_2.configure(bg=button_bg, fg=button_fg)
+    nupp_3.configure(bg=button_bg, fg=button_fg)
+
+def tyhjenda():
+    email.delete(0, 'end')
+    teema.delete(0, 'end')
+    kiri.delete('1.0', 'end')
+    lisa.config(text="") 
+    lisa.config(image="")
+
+    
 
 def vali_pilt():
     global file
@@ -92,6 +140,8 @@ kiri=Text(aken, bg="#E1EFDF", font=("Arial", 14), fg="black", width=30)
 
 nupp = Button(aken, text="LISA PILT", bg="green", font=("Arial", 25), fg="black", relief=RAISED, command=vali_pilt)
 nupp_2 = Button(aken, text="SAADA", bg="green", font=("Arial", 25), fg="black", relief=RAISED, command=saada)
+nupp_3 = Button(aken, text="TEEMA", bg="green", font=("Arial", 25), fg="black", relief=RAISED, command=theme)
+nupp_4 = Button(aken, text="🗑", bg="red", font=("Arial", 25), fg="white", relief=RAISED, command=tyhjenda)
 
 #-----------------------------------------------------------------------------------------------------
 
@@ -107,9 +157,13 @@ kiri.place(x=200, y=128, height=250)
 
 nupp.place(x=350, y=390)
 nupp_2.place(x=200, y=390)
+nupp_3.place(x=50, y=390)
+nupp_4.place(x=0, y=390)
 
 #-----------------------------------------------------------------------------------------------------
 
+progress = ttk.Progressbar(aken, mode='indeterminate', length=200)
+progress.place(x=160, y=360)
 
 
 #-----------------------------------------------------------------------------------------------------
@@ -135,9 +189,9 @@ aken.mainloop()
 
 2 Строка загрузки при отправке, чтобы пользователь мог видеть ход процесса.
 
-3 Выбор темы (темный/светлый режим) - добавление переключателя.
+///3 Выбор темы (темный/светлый режим) - добавление переключателя.
 
-4 Кнопка «Очистить форму», чтобы можно было быстро очистить все поля.
+///4 Кнопка «Очистить форму», чтобы можно было быстро очистить все поля.
 
 📤 Расширенные возможности отправки
 
@@ -147,3 +201,4 @@ aken.mainloop()
 
 3 Отправка HTML-писем с возможностью форматирования. 
 """
+
