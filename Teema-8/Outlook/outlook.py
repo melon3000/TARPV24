@@ -18,7 +18,6 @@ def theme():
     current_bg = aken["bg"]
 
     if current_bg == "white":
-        # Тёмная тема
         aken.configure(bg="black")
         label_bg = "black"
         label_fg = "white"
@@ -28,7 +27,6 @@ def theme():
         button_fg = "white"
         lisa_bg = "#111111"
     else:
-        # Светлая тема
         aken.configure(bg="white")
         label_bg = "green"
         label_fg = "white"
@@ -38,7 +36,6 @@ def theme():
         button_fg = "black"
         lisa_bg = "white"
 
-    # Обновляем элементы вручную
     email_label.configure(bg=label_bg, fg=label_fg)
     teema_label.configure(bg=label_bg, fg=label_fg)
     lisa_label.configure(bg=label_bg, fg=label_fg)
@@ -59,20 +56,20 @@ def tyhjenda():
     kiri.delete('1.0', 'end')
     lisa.config(text="") 
     lisa.config(image="")
+    lisa_label.config(0,'end')
 
     
-
 def vali_pilt():
-    global file
-    file = filedialog.askopenfilename()
-    file_name = os.path.basename(file)  # Extract only the file name
-    lisa.configure(text=file_name)  # Display only the file name
-    return file
+    global files
+    files = filedialog.askopenfilenames()
+    file_names = [os.path.basename(file) for file in files]
+    lisa.configure(text=", ".join(file_names))
+    return files
 
 def saada():
     kellele = email.get()
     text = kiri.get("1.0", END)
-    error = False  # Флаг для отслеживания ошибок
+    error = False
 
     try:
         if email.get().strip() == "":
@@ -102,8 +99,8 @@ def saada():
 
     smtp_server = "smtp.gmail.com"
     smtp_port = 587
-    sender_email = "nikitosik.pidoras@gmail.com"
-    em_passh = os.getenv("em_passh") # cmd -> setx em_passh = "xxxx xxxx xxxx xxxx"
+    sender_email = "ihavearm0@gmail.com"
+    em_passh = "kavf mpsp qxje cmat"
     context = ssl.create_default_context()
     msg = EmailMessage()
     msg.set_content(text)
@@ -162,8 +159,8 @@ nupp_4.place(x=0, y=390)
 
 #-----------------------------------------------------------------------------------------------------
 
-progress = ttk.Progressbar(aken, mode='indeterminate', length=200)
-progress.place(x=160, y=360)
+progress = ttk.Progressbar(aken, mode='indeterminate', length=150)
+progress.place(x=0, y=360)
 
 
 #-----------------------------------------------------------------------------------------------------
@@ -179,7 +176,7 @@ aken.mainloop()
 
 ///3 Отправка нескольким адресатам (адреса электронной почты, разделенные запятыми). 
 
-4 Добавление нескольких вложений, а не только одного файла.
+///4 Добавление нескольких вложений, а не только одного файла.
 
 5 Сохранение отправленных писем в журнале или базе данных.
 
@@ -187,7 +184,7 @@ aken.mainloop()
 
 1 Использование 1 ttk для улучшения оформления (более стильные кнопки и поля ввода).
 
-2 Строка загрузки при отправке, чтобы пользователь мог видеть ход процесса.
+///2 Строка загрузки при отправке, чтобы пользователь мог видеть ход процесса.
 
 ///3 Выбор темы (темный/светлый режим) - добавление переключателя.
 
